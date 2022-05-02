@@ -1,0 +1,110 @@
+<html>
+<head>
+    <title>pdf4oereb web service • Kanton Solothurn</title>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <!--<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->    
+
+    <style>    
+		* {
+            box-sizing: border-box;
+		}
+
+		body {
+            font-family: sans-serif;
+            margin: 0;
+		}
+		
+		.header {
+            /*background-color: #f1f1f1;*/
+            padding: 20px;
+            text-align: center;
+		}
+
+		.column {
+            float: left;
+            padding: 10px;
+		}
+		
+		.column.side {
+            width: 25%;
+		}
+		
+		.column.middle {
+            width: 50%;
+		}
+		
+		.row:after {
+            content: "";
+            display: table;
+            clear: both;
+		}
+
+		@media screen and (max-width: 600px) {
+            .column.side, .column.middle {
+                width: 100%;
+            }
+        }
+        
+        details {
+            color: black;
+        }
+    </style>    
+
+</head>
+
+<body>
+
+	<div class="header"><h1>pdf4oereb</h1></div>
+
+	<div class="row">
+        <div class="column side"></div>
+	  
+        <div class="column middle">
+            <!--<h2>Transforms a PLR DATA-Extract XML document version 2 into the corresponding PDF document.</h2> -->
+            <br/><br/>
+            <p>
+                <form action="convert" method="post" enctype="multipart/form-data">
+                    <label for="file">XML document:</label>
+                    <input type="file" id="file" name="file" accept="application/xml">
+                    <br/><br/>
+                    <label for="language">Language:</label>
+					<select name="language" id="language">
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="fr">French</option>
+                        <option value="rm">Romansh</option>
+					</select>
+                    <br/><br/>
+                    <button type="submit">Submit</button>
+                </form>
+            </p>
+            <br/></br>
+            <p>
+				<details>
+	                <summary>Help</summary>
+	                <p>
+                        <p>
+                            Images: If the images are embedded, it will use these images. If there are no embedded images, it will use the WMS GetMap requests.
+                        </p>
+                        <p>
+                            Resolution: The rubberband, the north arrow and the scalebar look blurry if the provided images (embedded and wms) are not 300dpi.
+                        </p>
+                        <p>
+                            Language: The static parts of the text do always correspond to the chosen language. The dynamic parts will only show up if the chosen language is 
+                            available in the xml. If the language cannot be found in the xml, it will take the first language element found.
+                        </p>
+                        <p>
+                            API: <code>curl -XPOST -F language=it -F file=@CH344982777421_geometry_wms.xml http://localhost:8080/convert --output CH344982777421_geometry_wms.pdf</code>
+                        </p>
+                    </p>
+				</details>
+            </p>
+        </div>
+        <div class="column side"></div>
+	</div>
+</body>
+</html>
