@@ -1,4 +1,4 @@
-name: oereb-web-service-docker
+name: pdf4oereb-web-service
 
 on:
   workflow_dispatch:
