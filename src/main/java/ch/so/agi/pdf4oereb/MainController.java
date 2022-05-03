@@ -3,6 +3,8 @@ package ch.so.agi.pdf4oereb;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -87,7 +89,12 @@ public class MainController {
         } catch (IOException | ConverterException e) {
             e.printStackTrace();
             log.error(e.getMessage());
-            return ResponseEntity.badRequest().contentType(MediaType.parseMediaType("text/plain")).body(e.getMessage());
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+
+            return ResponseEntity.badRequest().contentType(MediaType.parseMediaType("text/plain")).body(sw.toString());
         }
     }
 
